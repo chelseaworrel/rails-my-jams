@@ -1,8 +1,18 @@
 <h1>Edit your favorite song...</h1>
+<%= render partial: 'form' %>
+
+<!--
 <%= form_for(@song) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :artist %>
   <%= f.text_field :artist %>
   <%= f.submit %>
-<% end %>
+<% end %> -->
+
+<!-- this form used to live here but we made a partial
+because it is a duplicate form used in both
+new and edit, and we moved the form code to
+a folder in the views within songs directory
+called _form.html.erb and the render partial
+code is in both edit and new.html.erb files  -->

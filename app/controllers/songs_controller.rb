@@ -1,4 +1,7 @@
 class SongsController < ApplicationController
+
+  before_action(:set_song, only: [:show, :edit, :update, :destroy]) #set_song method is defined in private methods below
+
   def index
     @songs = Song.all
   end
@@ -18,17 +21,34 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find(params[:id]) #params[:id] comes from the url
+    #this and edit are empty because what lives inside them is: @song = Song.find(params[:id])
+    #which is defined in the before_action and the set_song priate method
   end
 
   def edit
-    @song = Song.find(params[:id])
+  end
+
+  def update
+    if @song.update(song_params)
+      redirect_to song_path(@song) #this can just be: redirect_to @song
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @song.destroy
+    redirect_to(songs_path)
   end
 
   private
 
   def song_params #use this when you get a ActiveModel::ForbiddenAttributesError
     params.require(:song).permit(:title, :artist)
+  end
+
+  def set_song
+    @song = Song.find(params[:id]) #params[:id] comes from the url
   end
 end
 
@@ -39,5 +59,5 @@ end
 
 # C -create method
 # R -index method
-# U -
-# D
+# U - need edit + update method
+# D - destroy method

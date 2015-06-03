@@ -1,7 +1,8 @@
 <h1>My Favorite Songs</h1>
 <% @songs.each do |song| %>
   <%= link_to song.title, song_path(song) %>
-  <%= link_to "Edit", edit_song_path(song) %><br>
+  <%= link_to "Edit", edit_song_path(song) %>
+  <%= link_to "Delete", song_path(song), method: :delete %><br>
 <% end %>
 
 <%= link_to "Post New Song", new_song_path %>
@@ -10,3 +11,6 @@
 <!-- can do this: song_path(song) OR song -->
 
 <!-- put the edit button inside the loop so you can edit each song  -->
+
+<!-- by default a link_to is a GET so in order to make it a delete you have to  -->
+<!-- add method: :delete  -->
